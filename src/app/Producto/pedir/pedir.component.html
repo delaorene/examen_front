@@ -1,0 +1,15 @@
+<div class="float-right" style="margin-right: 20px;">
+  <small>
+    <button class="btn btn-sm bg-dark text-white"
+            [disabled]="orden.cantidad == 0" routerLink="/carrito">
+      <i class="fa fa-shopping-cart"></i>
+    </button>
+    <span *ngIf="orden.cantidad > 0">
+      {{orden.cantidad}} Producto(s)
+      $  {{orden.precio }}
+    </span>
+    <span *ngIf="orden.cantidad == 0">
+      (vacio)
+    </span>
+  </small>
+</div>

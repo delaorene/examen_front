@@ -1,0 +1,67 @@
+<div class="container container-fluid">
+    <div class="row">
+      <div class="col mt-2">
+        <table class="table table-bordered table-striped p-2">
+          <thead>
+          <tr class="text-center">
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Existencia</th>
+            <th>Cantidad</th>
+            <th><i class="fa fa-trash-o"></i></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="orden.detalles.length == 0">
+            <td colspan="5" class="text-center">
+              Carrito Vacio
+            </td>
+          </tr>
+          <tr *ngFor="let detalle of orden.detalles">
+            <td>
+              {{detalle.sku.nombre}}
+            </td>
+            <td class="text-right">
+              $ {{detalle.sku.price}}
+            </td>
+            <td class="text-right">
+              {{detalle.sku.existencia}}
+            </td>
+            <td class="text-right">
+              {{detalle.amout}}
+           </td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-danger" (click)="orden.eliminarProducto(detalle.sku.sku)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td *ngIf="orden != undefined" class="text-right">
+              $ {{orden.precio}}
+            </td>
+            <td *ngIf="orden == undefined" class="text-right">
+                $ 0
+              </td>
+              <td style="background-color: rgba(0,0,0,.05);"></td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="text-center">
+        <button class="btn btn-primary m-1" routerLink="/listar">
+          Agregar Productos
+        </button>
+        <button class="btn btn-success m-1" (click)="hacerPedido(orden)"
+                [disabled]="orden.detalles.length == 0">
+          Hacer Pedido
+        </button>
+      </div>
+    </div>
+  </div>
+  
